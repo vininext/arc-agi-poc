@@ -1,0 +1,71 @@
+<html>
+
+<head>
+    <script type="text/javascript">
+        const input = [[0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 1, 1, 1, 1, 0, 0, 0, 0], [0, 1, 0, 0, 1, 0, 0, 0, 0], [0, 1, 0, 0, 1, 0, 0, 0, 0], [0, 1, 1, 1, 1, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0]]
+
+        const output = [[9, 9, 9, 9, 9, 9, 0, 0, 0], [9, 1, 1, 1, 1, 9, 0, 0, 0], [9, 1, 9, 9, 1, 9, 0, 0, 0], [9, 1, 9, 9, 1, 9, 0, 0, 0], [9, 1, 1, 1, 1, 9, 0, 0, 0], [9, 0, 0, 0, 0, 9, 0, 0, 0], [9, 9, 9, 9, 9, 9, 0, 0, 0]]
+
+        function createTable(matrix, id) {
+            // Create table element
+            const table = document.createElement('table');
+            table.border = '1';
+
+            // Get headers from first object keys
+            matrix.forEach(row => {
+                const tr = document.createElement('tr');
+                row.forEach(cell => {
+                    const td = document.createElement('td');
+
+                    //styling 
+                    td.style.width = '30px';
+                    td.style.height = '30px';
+                    td.style.background = colorMap(cell)
+
+                    //appending td
+                    tr.appendChild(td);
+                })
+                table.appendChild(tr);
+            });
+
+            // Add table to document
+            const tableContainer = document.getElementById(id);
+            tableContainer.appendChild(table);
+        }
+
+        function colorMap(n) {
+            switch (n) {
+                case 0: return "Black";
+                case 1: return "Blue";
+                case 2: return "Red";
+                case 3: return "Green";
+                case 4: return "Yellow";
+                case 5: return "Grey";
+                case 6: return "Pink";
+                case 7: return "Orange";
+                case 8: return "Azure";
+                case 9: return "Brown";
+                default: return "Black";
+            }
+        }
+
+        // Call the function when document is loaded
+        window.onload = () => {
+            createTable(input, "table-container-input");
+            createTable(output, "table-container-output");
+        }
+    </script>
+</head>
+
+<body>
+    <div style="display: flex; gap: 20px;">
+        <div id="table-container-input">
+            <h3>Input</h3>
+        </div>
+        <div id="table-container-output">
+            <h3>Output</h3>
+        </div>
+    </div>
+</body>
+
+</html>
