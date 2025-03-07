@@ -48,6 +48,32 @@ def connect_horizontal(grid: Grid, coordinates: Coordinates, color: Color) -> Gr
         if c + 2 < len(new_grid[r]) and new_grid[r][c+1] == 0 and new_grid[r][c+2] != 0:
             new_grid[r][c+1] = color            
     return new_grid
+
+def Fill8(grid: Grid, color: Color):
+    """
+    Changes the color of the interior of an object while preserving the border.
+    ""
+    rows = len(grid)
+    cols = len(grid[0])
+    
+    new_grid = copy_grid(grid)
+    
+    for i in range(1, rows-1):
+        for j in range(1, cols-1):
+            current = grid[i][j]
+            if (1 <= current <= 9 and
+                grid[i-1][j] == current and      # North
+                grid[i+1][j] == current and      # South
+                grid[i][j-1] == current and      # West
+                grid[i][j+1] == current and      # East
+                grid[i-1][j-1] == current and    # Northwest
+                grid[i-1][j+1] == current and    # Northeast
+                grid[i+1][j-1] == current and    # Southwest
+                grid[i+1][j+1] == current):      # Southeast
+                new_grid[i][j] = color
+                
+    return new_grid
+
     
         
 
